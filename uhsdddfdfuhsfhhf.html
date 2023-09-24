@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Touched By 2Pai</title>
+    <link rel="icon" type="image/x-icon" href="https://i.ibb.co/XLKhjjW/c072b847-985b-486d-a034-0288c3daefab.jpg">
+    <meta charset="utf-8">
+    <style>
+        html, body {
+            background-image: url('https://i.ibb.co/XLKhjjW/c072b847-985b-486d-a034-0288c3daefab.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center center;
+            color: #636b6f;
+            margin: 0;
+        }
+
+        .full-height {
+            height: 100vh;
+        }
+
+        .flex-center {
+            align-items: center;
+            display: flex;
+            justify-content: center;
+        }
+
+        .position-ref {
+            position: relative;
+        }
+
+        .content {
+            text-align: center;
+        }
+
+        .title {
+            font-size: 10px;
+            padding: 20px;
+        }
+
+        .text {
+            color: white;
+            font-size: 20px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
+        }
+
+        .middle {
+            padding: 20px;
+        }
+
+        .contact-button {
+            display: inline-block;
+            background-color: transparent;
+            border: 2px solid white;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: background-color 0.3s ease-in-out;
+            margin-right: 10px;
+        }
+
+        .contact-button:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .music-button {
+            display: inline-block;
+            background-color: transparent;
+            border: 2px solid white;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: background-color 0.3s ease-in-out;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+
+        .music-button:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .audio-info {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 12px;
+            font-weight: bold;
+            display: none;
+        }
+    </style>
+</head>
+<body align="center" oncontextmenu="return false" bgcolor="black">
+    <div class="error">
+        <div class="flex-center position-ref full-height">
+            <div class="content">
+                <audio id="music" src="https://www.gljinshan.com/upload/2022-03-16/song.mp3"></audio>
+                <div class="audio-info" id="info-text"></div>
+                <div class="text">
+                    <img src="https://i.ibb.co/WDPrmk0/2pai.gif" alt="hacker" width="35%" border="0"><br>
+                    <div class="middle">
+                        <code>
+                            <h1>Whoami? 2Pai</h1>
+                            <p>You've been hacked, but don't let it stop you.</p>
+                            <p>Stay resilient and learn from your mistakes.</p>
+                            <p>Website security is crucial, so never be complacent with your security measures.</p>
+                            <p>Fix vulnerabilities and strengthen your security even further.</p>
+                            <p>Don't let cybercrime undermine your achievements.</p>
+                            <p>Let's build a safer and more secure digital world together.</p>
+                            <button class="music-button" onclick="toggleMusic()">PLAY MUSIC</button>
+                            <a href="https://instagram.com/2pai__" class="contact-button" target="_blank" onclick="showContactMessage()">CONTACT</a>
+                        </code>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+    	alert('Touched By 2Pai');
+        document.addEventListener("contextmenu", function(e) {
+            e.preventDefault();
+        });
+        document.addEventListener("copy", function(e) {
+    e.clipboardData.setData("text/plain", e.clipboardData.getData("text/plain") + " @copyright by 2pai");
+});
+
+document.addEventListener("paste", function(e) {
+    e.preventDefault();
+    var pastedText = (e.clipboardData || window.clipboardData).getData('text');
+    var modifiedText = pastedText + " @copyright by 2pai";
+    document.execCommand("insertHTML", false, modifiedText);
+});
+
+        document.onkeydown = function(e) {
+            if (e.ctrlKey && (e.keyCode === 85 || e.keyCode === 123)) {
+                return false;
+            }
+        };
+
+        var music = document.getElementById("music");
+        var isPlaying = false;
+        var infoText = document.getElementById("info-text");
+
+        function toggleMusic() {
+            if (isPlaying) {
+                music.pause();
+                isPlaying = false;
+                infoText.innerHTML = "Audio stops...";
+            } else {
+                music.play();
+                isPlaying = true;
+                infoText.innerHTML = "Running audio...";
+            }
+            infoText.style.display = "block";
+            setTimeout(function () {
+                infoText.style.display = "none";
+            }, 2000);
+        }
+
+        function showContactMessage() {
+            infoText.innerHTML = "Please wait...";
+            infoText.style.display = "block";
+            setTimeout(function () {
+                infoText.style.display = "none";
+            }, 2000);
+        }
+    </script>
+</body>
+</html>
